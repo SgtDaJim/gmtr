@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/tonobo/mtr/cli"
+	"github.com/SgtDaJim/gmtr/cli"
 )
 
 func main() {

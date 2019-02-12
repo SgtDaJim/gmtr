@@ -7,8 +7,8 @@ import (
 	"net"
 	"time"
 
+	"github.com/SgtDaJim/gmtr/imcp"
 	gm "github.com/buger/goterm"
-	"github.com/tonobo/mtr/imcp"
 )
 
 type HopStatistic struct {
@@ -33,12 +33,12 @@ type packet struct {
 	ResponseTime float64 `json:"respond_ms"`
 }
 
-func (s *HopStatistic) Next() {
+func (s *HopStatistic) Next(srcAddr string) {
 	if s.Target == "" {
 		return
 	}
 	s.pingSeq++
-	r, _ := imcp.SendIMCP("0.0.0.0", s.Dest, s.Target, s.TTL, s.PID, s.Timeout, s.pingSeq)
+	r, _ := imcp.SendIMCP(srcAddr, s.Dest, s.Target, s.TTL, s.PID, s.Timeout, s.pingSeq)
 	s.Packets = s.Packets.Prev()
 	s.Packets.Value = r
 

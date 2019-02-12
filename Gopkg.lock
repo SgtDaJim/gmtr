@@ -100,9 +100,6 @@
     "github.com/hokaccha/go-prettyjson",
     "github.com/spf13/cobra",
     "github.com/tonobo/mtr/cli",
-    "github.com/tonobo/mtr/hop",
-    "github.com/tonobo/mtr/imcp",
-    "github.com/tonobo/mtr/mtr",
     "golang.org/x/net/icmp",
     "golang.org/x/net/ipv4",
   ]
