@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/SgtDaJim/gmtr/hop"
-	"github.com/SgtDaJim/gmtr/imcp"
+	"github.com/SgtDaJim/gmtr/icmp"
 	gm "github.com/buger/goterm"
 )
 
@@ -41,7 +41,7 @@ func NewMTR(addr, srcAddr string, timeout time.Duration, interval time.Duration,
 	}, make(chan struct{})
 }
 
-func (m *MTR) registerStatistic(ttl int, r imcp.ICMPReturn) *hop.HopStatistic {
+func (m *MTR) registerStatistic(ttl int, r icmp.ICMPReturn) *hop.HopStatistic {
 	m.Statistic[ttl] = &hop.HopStatistic{
 		Sent:           1,
 		TTL:            ttl,
@@ -99,7 +99,7 @@ func (m *MTR) discover(ch chan struct{}) {
 	unknownHopsCount := 0
 	for ttl := 1; ttl < m.maxHops; ttl++ {
 		time.Sleep(m.hopsleep)
-		hopReturn, err := imcp.SendDiscoverIMCP(m.SrcAddress, &ipAddr, ttl, pid, m.timeout, 1)
+		hopReturn, err := icmp.SendDiscoverICMP(m.SrcAddress, &ipAddr, ttl, pid, m.timeout, 1)
 
 		m.mutex.Lock()
 		s := m.registerStatistic(ttl, hopReturn)

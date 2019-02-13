@@ -1,4 +1,4 @@
-package imcp
+package icmp
 
 import (
 	"bytes"
@@ -18,8 +18,8 @@ type ICMPReturn struct {
 	Elapsed time.Duration
 }
 
-// SendDiscoverIMCP sends a IMCP to a given destination with a TTL to discover hops
-func SendDiscoverIMCP(localAddr string, dst net.Addr, ttl, pid int, timeout time.Duration, seq int) (hop ICMPReturn, err error) {
+// SendDiscoverICMP sends a ICMP to a given destination with a TTL to discover hops
+func SendDiscoverICMP(localAddr string, dst net.Addr, ttl, pid int, timeout time.Duration, seq int) (hop ICMPReturn, err error) {
 	hop.Success = false
 	start := time.Now()
 	c, err := icmp.ListenPacket("ip4:icmp", localAddr)
@@ -67,8 +67,8 @@ func SendDiscoverIMCP(localAddr string, dst net.Addr, ttl, pid int, timeout time
 	return hop, err
 }
 
-// SendIMCP sends a IMCP to a given destination which requires a  reply from that specific destination
-func SendIMCP(localAddr string, dst net.Addr, target string, ttl, pid int, timeout time.Duration, seq int) (hop ICMPReturn, err error) {
+// SendICMP sends a ICMP to a given destination which requires a  reply from that specific destination
+func SendICMP(localAddr string, dst net.Addr, target string, ttl, pid int, timeout time.Duration, seq int) (hop ICMPReturn, err error) {
 	hop.Success = false
 	start := time.Now()
 	c, err := icmp.ListenPacket("ip4:icmp", localAddr)
